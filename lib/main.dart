@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
 import 'package:nextflow_note_client_with_authen/pages/login_page.dart';
 import 'package:nextflow_note_client_with_authen/pages/note_page.dart';
+import 'package:nextflow_note_client_with_authen/token_manager.dart';
 
-final storage = new FlutterSecureStorage();
 void main() {
   runApp(MyApp());
 }
@@ -35,10 +35,10 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: storage.read(key: 'token'),
-      builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+      future: TokenManager.isTokenExist(),
+      builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          if (snapshot.hasData) {
+          if (snapshot.data) {
             return NotePage();
           } else {
             return LoginPage();
