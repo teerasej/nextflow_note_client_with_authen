@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:nextflow_note_client_with_authen/connection.dart';
 
 import '../token_manager.dart';
+
 class SignUpPage extends StatefulWidget {
   @override
   _SignUpPageState createState() => _SignUpPageState();
@@ -100,6 +101,22 @@ class _SignUpPageState extends State<SignUpPage> {
                           },
                         );
                       } else {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text('Opps...'),
+                              actions: [
+                                TextButton(
+                                  child: Text('close'),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                )
+                              ],
+                            );
+                          },
+                        );
                       }
                     }
                   },
