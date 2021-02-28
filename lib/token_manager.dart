@@ -6,7 +6,7 @@ class TokenManager {
   static Future<bool> isTokenExist() async {
     var token = await storage.read(key: 'token');
 
-    if (token != null || token.isNotEmpty)
+    if (token != null && token.isNotEmpty)
       return true;
     else
       return false;
