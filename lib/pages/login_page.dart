@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:nextflow_note_client_with_authen/connection.dart';
 import 'package:nextflow_note_client_with_authen/pages/signup_page.dart';
+import 'package:dio/dio.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -69,9 +73,18 @@ class _LoginPageState extends State<LoginPage> {
                 child: RaisedButton(
                   color: Colors.blue,
                   textColor: Colors.white,
-                  onPressed: () {
+                  onPressed: () async {
                     if (_formKey.currentState.validate()) {
                       _formKey.currentState.save();
+
+                      var data = {"email": _email, "password": _password};
+
+                      final response = await Connection.getDio().post(
+                        '/login',
+                        data: json.encode(data),
+                      );
+
+                      return;
                     }
                   },
                   child: Text('Sign in'),
