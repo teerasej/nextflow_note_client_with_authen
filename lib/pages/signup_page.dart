@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:nextflow_note_client_with_authen/pages/signup_page.dart';
 
-class LoginPage extends StatefulWidget {
+class SignUpPage extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _SignUpPageState createState() => _SignUpPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sign in'),
+        title: Text('Create New Account'),
       ),
       body: Container(
         padding: EdgeInsets.all(10),
@@ -40,26 +39,7 @@ class _LoginPageState extends State<LoginPage> {
                 color: Colors.blue,
                 textColor: Colors.white,
                 onPressed: () {},
-                child: Text('Sign in'),
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: OutlineButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return SignUpPage();
-                      },
-                    ),
-                  );
-                },
-                child: Text('Need sign up?'),
+                child: Text('Sign up'),
               ),
             )
           ],
