@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:nextflow_note_client_with_authen/pages/login_page.dart';
+import 'package:nextflow_note_client_with_authen/pages/note_page.dart';
 
+final storage = new FlutterSecureStorage();
 void main() {
   runApp(MyApp());
 }
@@ -30,11 +34,26 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Container(),
+    return FutureBuilder(
+      future: storage.read(key: 'token'),
+      builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.hasData) {
+            return NotePage();
+          } else {
+            return LoginPage();
+          }
+        }
+
+        return Scaffold(
+          appBar: AppBar(
+            title: Text('Loading...'),
+          ),
+          body: Center(
+            child: CircularProgressIndicator(),
+          ),
+        );
+      },
     );
   }
 }
