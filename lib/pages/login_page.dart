@@ -32,8 +32,10 @@ class _LoginPageState extends State<LoginPage> {
               TextFormField(
                 initialValue: 'pon@gmail.com',
                 validator: (String email) {
-                  if (email.isEmpty) return 'Please fill in email';
-                  return '';
+                  if (email.isEmpty) {
+                    return 'Please fill in email';
+                  }
+                  return null;
                 },
                 onSaved: (String email) {
                   _email = email;
@@ -50,8 +52,10 @@ class _LoginPageState extends State<LoginPage> {
                 initialValue: '1234',
                 obscureText: true,
                 validator: (String password) {
-                  if (password.isEmpty) return 'Please fill in password';
-                  return '';
+                  if (password.isEmpty) {
+                    return 'Please fill in password';
+                  }
+                  return null;
                 },
                 onSaved: (String password) {
                   _password = password;
