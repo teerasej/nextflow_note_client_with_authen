@@ -34,26 +34,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: TokenManager.isTokenExist(),
-      builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          if (snapshot.data) {
-            return NotePage();
-          } else {
-            return LoginPage();
-          }
-        }
-
-        return Scaffold(
-          appBar: AppBar(
-            title: Text('Loading...'),
-          ),
-          body: Center(
-            child: CircularProgressIndicator(),
-          ),
-        );
-      },
-    );
+    return Container();
   }
 }

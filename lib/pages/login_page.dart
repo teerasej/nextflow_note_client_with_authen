@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:nextflow_note_client_with_authen/connection.dart';
 import 'package:nextflow_note_client_with_authen/pages/note_page.dart';
 import 'package:nextflow_note_client_with_authen/pages/signup_page.dart';
-import 'package:dio/dio.dart';
 import 'package:nextflow_note_client_with_authen/token_manager.dart';
 
 class LoginPage extends StatefulWidget {
@@ -79,43 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                     if (_formKey.currentState.validate()) {
                       _formKey.currentState.save();
 
-                      var data = {"email": _email, "password": _password};
-
-                      final response = await Connection.getDio().post(
-                        '/login',
-                        data: json.encode(data),
-                      );
-
-                      if (response.statusCode == 200 &&
-                          response.data['token'] != null) {
-                        TokenManager.saveToken(response.data['token']);
-
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (BuildContext context) {
-                              return NotePage();
-                            },
-                          ),
-                        );
-                      } else {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: Text('Opps...'),
-                              actions: [
-                                TextButton(
-                                  child: Text('close'),
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                )
-                              ],
-                            );
-                          },
-                        );
-                      }
+                      //
                     }
                   },
                   child: Text('Sign in'),

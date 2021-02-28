@@ -53,38 +53,7 @@ class _NoteCreatePageState extends State<NoteCreatePage> {
                   onPressed: () async {
                     if (_formKey.currentState.validate()) {
                       _formKey.currentState.save();
-
-                      var data = {"message": _message};
-
-                      var dio = Connection.getDio();
-                      dio.options.headers['Authorization'] =
-                          "Bearer ${TokenManager.userToken}";
-
-                      final response = await dio.post(
-                        '/notes',
-                        data: json.encode(data),
-                      );
-
-                      if (response.statusCode == 200) {
-                        Navigator.pop(context, true);
-                      } else {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: Text('Opps...'),
-                              actions: [
-                                TextButton(
-                                  child: Text('close'),
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                )
-                              ],
-                            );
-                          },
-                        );
-                      }
+                      //
                     }
                   },
                   child: Text('Save'),
