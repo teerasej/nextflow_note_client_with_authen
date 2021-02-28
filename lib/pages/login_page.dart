@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:nextflow_note_client_with_authen/connection.dart';
 import 'package:nextflow_note_client_with_authen/pages/signup_page.dart';
 import 'package:dio/dio.dart';
+import 'package:nextflow_note_client_with_authen/token_manager.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -83,6 +84,20 @@ class _LoginPageState extends State<LoginPage> {
                         '/login',
                         data: json.encode(data),
                       );
+
+                      if (response.statusCode == 200 &&
+                          response.data['token'] != null) {
+                        TokenManager.saveToken(response.data['token']);
+                      } else {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text('Opps...'),
+                            );
+                          },
+                        );
+                      }
 
                       return;
                     }
