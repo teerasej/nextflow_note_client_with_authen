@@ -41,7 +41,18 @@ class _NotePageState extends State<NotePage> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () async {
+          var isNoteCreated = await Navigator.push(
+            context,
+            MaterialPageRoute(builder: (BuildContext context) {
+              return NoteCreatePage();
+            }),
+          );
+
+          if (isNoteCreated) {
+            setState(() {});
+          }
+        },
         child: Icon(Icons.add),
       ),
     );
