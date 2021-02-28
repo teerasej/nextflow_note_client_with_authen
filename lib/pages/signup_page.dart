@@ -1,5 +1,9 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:nextflow_note_client_with_authen/connection.dart';
+
+import '../token_manager.dart';
 class SignUpPage extends StatefulWidget {
   @override
   _SignUpPageState createState() => _SignUpPageState();
@@ -66,6 +70,13 @@ class _SignUpPageState extends State<SignUpPage> {
                   onPressed: () async {
                     if (_formKey.currentState.validate()) {
                       _formKey.currentState.save();
+
+                      var data = {"email": _email, "password": _password};
+
+                      final response = await Connection.getDio().post(
+                        '/signup',
+                        data: json.encode(data),
+                      );
                   },
                   child: Text('Sign up'),
                 ),
