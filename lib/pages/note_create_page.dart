@@ -65,6 +65,26 @@ class _NoteCreatePageState extends State<NoteCreatePage> {
                         data: json.encode(data),
                       );
 
+                      if (response.statusCode == 200) {
+                        Navigator.pop(context, true);
+                      } else {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text('Opps...'),
+                              actions: [
+                                TextButton(
+                                  child: Text('close'),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                )
+                              ],
+                            );
+                          },
+                        );
+                      }
                     }
                   },
                   child: Text('Save'),
