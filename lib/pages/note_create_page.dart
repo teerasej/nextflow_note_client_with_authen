@@ -54,9 +54,16 @@ class _NoteCreatePageState extends State<NoteCreatePage> {
                     if (_formKey.currentState.validate()) {
                       _formKey.currentState.save();
 
-                      
-
                       var data = {"message": _message};
+
+                      var dio = Connection.getDio();
+                      dio.options.headers['Authorization'] =
+                          "Bearer ${TokenManager.userToken}";
+
+                      final response = await dio.post(
+                        '/notes',
+                        data: json.encode(data),
+                      );
 
                     }
                   },
