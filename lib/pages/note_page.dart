@@ -1,5 +1,7 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:nextflow_note_client_with_authen/connection.dart';
+import 'package:nextflow_note_client_with_authen/pages/note_create_page.dart';
 import 'package:nextflow_note_client_with_authen/token_manager.dart';
 
 class NotePage extends StatefulWidget {
@@ -19,9 +21,20 @@ class _NotePageState extends State<NotePage> {
       ),
       body: FutureBuilder(
         future: dio.get('/notes'),
-        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<Response> snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            return Container();
+            List items = snapshot.data.data;
+
+            return ListView.builder(
+              itemCount: items.length,
+              itemBuilder: (BuildContext context, int index) {
+                var item = items[index];
+
+                return ListTile(
+                  title: Text(item['message']),
+                );
+              },
+            );
           }
 
           return LinearProgressIndicator();
