@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:nextflow_note_client_with_authen/connection.dart';
 import 'package:nextflow_note_client_with_authen/token_manager.dart';
 
-class NotePage extends StatelessWidget {
+class NotePage extends StatefulWidget {
+  @override
+  _NotePageState createState() => _NotePageState();
+}
+
+class _NotePageState extends State<NotePage> {
   @override
   Widget build(BuildContext context) {
     var dio = Connection.getDio();
