@@ -104,6 +104,14 @@ class _LoginPageState extends State<LoginPage> {
                           builder: (BuildContext context) {
                             return AlertDialog(
                               title: Text('Opps...'),
+                              actions: [
+                                TextButton(
+                                  child: Text('close'),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                )
+                              ],
                             );
                           },
                         );
