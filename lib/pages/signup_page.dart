@@ -77,6 +77,31 @@ class _SignUpPageState extends State<SignUpPage> {
                         '/signup',
                         data: json.encode(data),
                       );
+
+                      if (response.statusCode == 200 &&
+                          response.data['user']['ok'] == 1) {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text('Success!'),
+                              content: Text(
+                                  'Registration success! Please login with your account.'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text('ok'),
+                                )
+                              ],
+                            );
+                          },
+                        );
+                      } else {
+                      }
+                    }
                   },
                   child: Text('Sign up'),
                 ),
